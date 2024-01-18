@@ -1,5 +1,3 @@
-import datetime
-
 from asyncpg import Connection
 
 from greeting.exceptions import LengthException
@@ -13,15 +11,14 @@ async def check_name(name: str) -> None:
 
 
 async def add_greeting_to_db(name: str, conn: Connection):
-    timestamp = datetime.datetime.now()
-    stmt = f"""INSERT INTO greet_info VALUES
-    (default, '{name}', '{timestamp}');
+    stmt = f"""INSERT INTO greet_info_python VALUES
+    (default, '{name}', default);
     """
     await conn.execute(stmt)
 
 
 async def get_all_greetings_from_db(conn: Connection):
-    stmt = f"""SELECT * FROM greet_info"""
+    stmt = f"""SELECT * FROM greet_info_python"""
     rows = await conn.fetch(stmt)
 
     return rows
