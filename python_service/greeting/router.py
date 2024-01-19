@@ -10,7 +10,14 @@ greeting_router = APIRouter()
 
 
 @greeting_router.get("/greet")
-async def greet_by_name(name: str, connection: Connection = Depends(get_connection)):
+async def greet_by_name(name: str, connection: Connection = Depends(get_connection)) -> JSONResponse:
+    """
+    Takes name, returns JSON-object
+
+    :param name: Name to greet
+    :param connection: Get database connection using dependency
+    :return: JSONResponse
+    """
     try:
         await check_name(name)
     except LengthException as ex:
@@ -21,7 +28,11 @@ async def greet_by_name(name: str, connection: Connection = Depends(get_connecti
 
 
 @greeting_router.get("/greet/history")
-async def get_all_greetings(connection: Connection = Depends(get_connection)):
+async def get_all_greetings(connection: Connection = Depends(get_connection)) -> JSONResponse:
+    """
+    :param connection: Get database connection using dependency
+    :return: JSON list of all table rows
+    """
     all_greetings = await get_all_greetings_from_db(connection)
 
     return all_greetings

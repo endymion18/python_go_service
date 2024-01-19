@@ -1,7 +1,6 @@
 from dotenv import load_dotenv
 import os
 
-os.chdir('../..')
 load_dotenv()
 
 

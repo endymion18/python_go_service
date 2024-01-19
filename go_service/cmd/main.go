@@ -13,7 +13,7 @@ func main() {
 		log.Fatalf("error init configs %s", err.Error())
 	}
 
-	if err := godotenv.Load("../.env"); err != nil {
+	if err := godotenv.Load("./.env"); err != nil {
 		log.Fatalf("error loading env %s", err.Error())
 	}
 
