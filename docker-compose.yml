@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  python_app:
+    build:
+      context: ./python_service
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+  go_app:
+    build:
+      context: ./go_service
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    depends_on:
+      - python_app
